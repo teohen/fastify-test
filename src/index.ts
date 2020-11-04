@@ -1,7 +1,7 @@
 import { ServerResponse, IncomingMessage, Server } from 'http';
 import fastify, {FastifyInstance} from 'fastify'
 
-import routes from "./routes";
+import routes from './routes'
 
 const server: FastifyInstance<
   Server,

@@ -2,6 +2,6 @@
 export default class StatusController  {
 
 	getStatus = async () => {
-		return {message: 'ok'}
+		return {message: 'ok, sim'}
 	}
 }
