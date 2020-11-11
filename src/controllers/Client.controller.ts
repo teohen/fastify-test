@@ -7,12 +7,11 @@ export default class ClientController  {
 
 	private clientService = new ClienteService()
 
-	async getClient():Promise<Array<Client>> {
-		const clients = this.clientService.createFake(3)
-		return clients
+	async index():Promise<Client[]> {
+		return await this.clientService.index()
 	}
 
-	async createClient(req: FastifyRequest, res: FastifyReply): Promise<Client> {
+	async createClient(req: FastifyRequest): Promise<Client | Error>  {
 		try {
 			const client =  <Client>{
 				name: req.body.name,
@@ -25,7 +24,7 @@ export default class ClientController  {
 			return client
 		}catch (err){
 			console.log(err)
-			return new Error('DEU RUIM')
+			return new Error('An error occured while trying to create a new Client')
 		}
 	}
 }	
