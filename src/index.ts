@@ -19,7 +19,7 @@ server.register(fsequelize, {
   dialect: 'sqlite',
   storage: './src/database/db.sqlite'
 }).ready() 
-server.addSchema(clientSchema)
+server.addSchema(clientSchema.clientSchemRef)
 
 
 const start = async () =>{
