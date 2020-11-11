@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 
 import StatusController from './controllers/Status.controller'
 import ClientController from './controllers/Client.controller'
+import createClientSchema from './schemas/CreateClient.schema'
 
 export default async (fastify: FastifyInstance): Promise<void> => {
 
@@ -16,7 +17,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 		return  await clientController.getClient()
 	})
 
-	fastify.post('/client', async (req: FastifyRequest, res: FastifyReply) => {
+	fastify.post('/client', createClientSchema,async (req: FastifyRequest, res: FastifyReply) => {
 		return  await clientController.createClient(req, res)	
 	})
 }
