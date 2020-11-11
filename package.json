@@ -1,5 +1,6 @@
 {
   "name": "fastify-test",
+  "type": "module",
   "version": "1.0.0",
   "description": "A test of fastify performance",
   "main": "index.js",
@@ -7,8 +8,10 @@
   "author": "teohen <teodorohenriquecarvalho@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/jest": "^26.0.15",
-    "fastify": "^3.7.0"
+    "fastify": "^3.7.0",
+    "fastify-sequelize": "^1.0.4",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.6",
