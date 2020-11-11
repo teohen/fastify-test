@@ -1,15 +1,16 @@
-import { Client } from './../models/Client';
+import { Model } from 'sequelize/types';
+import ClientModel, { Client } from './../models/Client';
 
 export class ClienteService {
-    createFake(length: number): Client[] {
-        const clients = Array<Client>()
-
-        for (let i = 0; i < length; i++)
-            clients.push(new Client("Teo", new Date(), "@teohen")) 
-
-        return clients
-    }
-    create(client: Client){
-        return client
+    async create(client: Client): Promise<Model> {
+        const newClient = ClientModel.build({
+            name: client.name,
+            email: client.email,
+            number: client.number,
+            birthDate: client.birthDate
+        })
+        await newClient.save()
+        console.log('saved')
+        return newClient
     }
 }

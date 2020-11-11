@@ -1,7 +1,9 @@
+import { FastifyRequest, FastifyReply } from 'fastify';
 import {ClienteService} from './../services/Cliente.service';
-import { Client } from './../models/Client';
 
-export default class StatusController  {
+import { Client } from './../models/Client'
+
+export default class ClientController  {
 
 	private clientService = new ClienteService()
 
@@ -10,7 +12,20 @@ export default class StatusController  {
 		return clients
 	}
 
-	async createClient(client: Client): Promise<Client> {
-		return this.clientService.create(client)
+	async createClient(req: FastifyRequest, res: FastifyReply): Promise<Client> {
+		try {
+			const client =  <Client>{
+				name: req.body.name,
+				email: req.body.email,
+				number: req.body?.number,
+				birthDate: req.body.birthDate
+			}
+			
+			await this.clientService.create(client)
+			return client
+		}catch (err){
+			console.log(err)
+			return new Error('DEU RUIM')
+		}
 	}
 }	

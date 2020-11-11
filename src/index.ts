@@ -1,7 +1,9 @@
 import { ServerResponse, IncomingMessage, Server } from 'http';
 import fastify, {FastifyInstance} from 'fastify'
+const fsequelize =  require('fastify-sequelize')
 
 import routes from './routes'
+import clientSchema from '../src/schemas/Client.schema';
 
 const server: FastifyInstance<
   Server,
@@ -11,11 +13,18 @@ const server: FastifyInstance<
 
 server.register(require("fastify-blipp"));
 server.register(routes)
+server.register(fsequelize, {
+  instance: 'sequelize',
+  autoConnect: true,
+  dialect: 'sqlite',
+  storage: './src/database/db.sqlite'
+}).ready() 
+server.addSchema(clientSchema)
+
 
 const start = async () =>{
     try {
         await server.listen(3000, "localhost");
-        console.log('teste')
         server.blipp();
     } catch (err) {
         console.log(err);

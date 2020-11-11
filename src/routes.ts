@@ -3,7 +3,6 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
 import StatusController from './controllers/Status.controller'
 import ClientController from './controllers/Client.controller'
 
-
 export default async (fastify: FastifyInstance): Promise<void> => {
 
 	const statusController = new StatusController()
@@ -18,6 +17,6 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 	})
 
 	fastify.post('/client', async (req: FastifyRequest, res: FastifyReply) => {
-		return  await clientController.createClient(req.body)
+		return  await clientController.createClient(req, res)	
 	})
 }
