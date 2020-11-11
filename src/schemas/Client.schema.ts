@@ -87,9 +87,42 @@ const getAllClientsSchema = {
 		}
 	}
 
+const getClient = {
+	schema: {
+		tags: ['client'],
+		descriptions: 'get a client from the database',
+		querystring: {
+			type: 'object',
+			required: ['id'],
+			properties: {
+				id: { type: 'number', description: 'enter the client id', example: 1254 }
+			}
+        },
+		response: {
+			200: { $ref: 'clientDataSchema#' },
+			400: {
+				type: 'object',
+				properties: {
+					statusCode: { type: 'number' },
+					error: { type: 'string' },
+					message: { type: 'string' },
+				}
+			},
+			500: {
+				type: 'object',
+				properties: {
+					statusCode: { type: 'number' },
+					error: { type: 'string' },
+					message: { type: 'string' },
+				}
+			}
+		}
+	}
+}
 
 const clientSchema = {
 	clientSchemRef: clientSchemaRef,
+	getClient: getClient,
 	createClientSchema: createClientSchema,
 	getAllClientsSchema: getAllClientsSchema
 }

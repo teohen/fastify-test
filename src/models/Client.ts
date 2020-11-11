@@ -1,4 +1,4 @@
-import {  DataTypes } from "sequelize"
+import {  DataTypes, Model} from "sequelize"
 import connection from './../database/connection'
 
 export interface Client {
@@ -34,5 +34,15 @@ const ClientModel = connection.define("Client", {
 }, {
   tableName: 'clients'
 });
+
+export const modelToInterface = (model:Model<Client>) => {
+  return <Client>{
+    id: model.getDataValue("id"),
+    name: model.getDataValue("name"),
+    number: model.getDataValue("number"),
+    email: model.getDataValue("email"),
+    birthDate: model.getDataValue("birthDate")
+  }
+}
 
 export default ClientModel

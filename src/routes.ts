@@ -14,11 +14,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 		return statusController.getStatus()
 	})
 
-	fastify.get('/client', clientSchema.getAllClientsSchema, async (req: FastifyRequest, res: FastifyReply) => {
+	fastify.get('/client', clientSchema.getAllClientsSchema, async () => {
 		return  await clientController.index()
 	})
 
-	fastify.post('/client', clientSchema.createClientSchema,async (req: FastifyRequest, res: FastifyReply) => {
-		return  await clientController.createClient(req, res)	
+	fastify.post('/client', clientSchema.createClientSchema,async (req: FastifyRequest) => {
+		return  await clientController.createClient(req)	
+	})
+
+	fastify.get('/client/:id', clientSchema.getClient, async(req: FastifyRequest) => {
+		return await clientController.getClient(req)
 	})
 }
